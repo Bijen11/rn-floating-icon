@@ -5,33 +5,45 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+import {AntDesign} from '@expo/vector-icons';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { Pressable, SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+  
+    <View style = {styles.container}>
+      
+      
+      <View style={[styles.hearts]}>
+      <AntDesign name='heart' size={40} color={'blue'}/>
+      </View>
+      
+      <TouchableOpacity style={styles.button}>
+        <AntDesign name='hearto' size={40}/>
+      </TouchableOpacity>
+      
+    </View>
+
   );
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+  },
+  button:{
+    width:50,
+    right:40,
+    bottom:40,
+    height:50,
+    alignItems:'center',
+    position:'absolute',
+    justifyContent:'center',
+  },
+  hearts:{
+    
+  }
+})
